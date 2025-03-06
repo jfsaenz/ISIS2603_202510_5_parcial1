@@ -53,11 +53,11 @@ public class StatsService {
 
     public Double calculateCourseAverage(String courseCode) {
         // TODO
-        log.info("Calculating average for course with code: {}", courseCode);
+        log.info("Calculando {}", courseCode);
 
         Optional<CourseEntity> courseOpt = cursoRepository.findByCourseCode(courseCode);
         if (!courseOpt.isPresent()) {
-            log.error("Course with code {} not found", courseCode);
+            log.error("el curso {} no se encontró", courseCode);
             return null;
         }
 
@@ -65,7 +65,7 @@ public class StatsService {
         List<StudentEntity> students = course.getStudents();
 
         if (students.isEmpty()) {
-            log.info("No students found for course with code: {}", courseCode);
+            log.info("No hay estudiantes en: {}", courseCode);
             return null;
         }
 
@@ -75,7 +75,7 @@ public class StatsService {
                 .collect(Collectors.toList());
 
         if (records.isEmpty()) {
-            log.info("No records found for course with code: {}", courseCode);
+            log.info("No hay registros para: {}", courseCode);
             return null;
         }
         double average = records.stream()
