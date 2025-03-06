@@ -19,5 +19,12 @@ public class StudentService {
 
     public StudentEntity createStudent(StudentEntity newStudent) throws RepeatedStudentException {
         // TODO
+        Optional<StudentEntity> existingStudent = studentRepository.findByLogin(newStudent.getLogin());
+        if (existingStudent.isPresent()) {
+            throw new RepeatedStudentException("El estudiante ingresado ya existe.");
+        }
+
+        return studentRepository.save(newStudent);
     }
+    
 }
